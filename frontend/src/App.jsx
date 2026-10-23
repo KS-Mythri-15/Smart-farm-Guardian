@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 
-const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const API = (import.meta.env.VITE_API_URL || "https://smart-farm-guardian.onrender.com").replace(/\/+$/, "");
 
 const NAV = [
   { id: "overview", icon: "◫", label: "Overview", group: "WORKSPACE" },
@@ -158,7 +158,7 @@ function App() {
       setError("");
     } catch {
       setApiOnline(false);
-      setError("Can't reach FastAPI at 127.0.0.1:8000. Check the backend terminal.");
+     setError(`Can't reach FastAPI at ${API}. Check the backend service.`);
     } finally {
       setLoading(false);
     }
