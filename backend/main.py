@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException, Query, UploadFile, File, Body
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from agent import evaluate_event, DEFAULT_FARM_RULES
+from backend.agent import evaluate_event, DEFAULT_FARM_RULES
 from database import initialize_database, save_event, get_connection
 import base64
 import json
