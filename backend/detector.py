@@ -6,7 +6,8 @@ import cv2
 import numpy as np
 import requests
 from ultralytics import YOLO
-
+import os
+import base64
 
 # --------------------------------------------------
 # PROJECT CONFIGURATION
@@ -16,7 +17,14 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 MODEL_DIR = PROJECT_DIR / "models"
 KNOWN_FACES_DIR = PROJECT_DIR / "backend" / "known_faces"
 OWNER_PROFILE = KNOWN_FACES_DIR / "owner_profile.npz"
+def ensure_owner_profile():
+    if OWNER_PROFILE.exists():
+        return
 
+    encoded = os.getenv("OWNER_PROFILE_B64")
+    if encoded:
+        KNOWN_FACES_DIR.mkdir(parents=True, exist_ok=True)
+        OWNER_PROFILE.write_bytes(base64.b64decode(encoded))
 # YOLO11s is more capable than YOLO11n for small/partly occluded people.
 # Ultralytics downloads yolo11s.pt automatically if it is not available locally.
 YOLO_MODEL_NAME = "yolo11s.pt"
@@ -39,6 +47,7 @@ API_URL = "http://127.0.0.1:8000/events"
 # --------------------------------------------------
 
 def load_owner_models():
+    ensure_owner_profile()
     """Load YuNet, SFace, and the enrolled owner embeddings."""
     detector_path = MODEL_DIR / "face_detection_yunet_2023mar.onnx"
     recognizer_path = MODEL_DIR / "face_recognition_sface_2021dec.onnx"
