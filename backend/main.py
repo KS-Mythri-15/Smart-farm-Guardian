@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from backend.agent import evaluate_event, DEFAULT_FARM_RULES
-from database import initialize_database, save_event, get_connection
+from backend.database import initialize_database, save_event, get_connection
 import base64
 import json
 
@@ -21,7 +21,7 @@ import os
 
 from fastapi.staticfiles import StaticFiles
 
-from detector import (
+from backend.detector import (
     load_person_model,
     load_owner_models,
     detect_people,

@@ -1,6 +1,6 @@
 
 from datetime import datetime
-from database import initialize_database, save_event
+from backend.database import initialize_database, save_event
 
 DEFAULT_FARM_RULES = {
     "work_start_hour": 6,
