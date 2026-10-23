@@ -25,3 +25,16 @@ models/*.onnx
 # Frontend dependencies and build output
 frontend/node_modules/
 frontend/dist/
+
+
+# Python diagnostic scripts (keep tracked if needed)
+# Diagnostic images and local test files
+backend/diagnostic_conf_*.jpg
+bus.jpg
+installed_packages_backup.txt
+
+# Local video files and generated evidence
+videos/
+
+# YOLO model weights
+backend/yolo11s.pt
